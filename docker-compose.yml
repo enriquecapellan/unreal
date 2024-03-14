@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16.2-alpine3.19
+    container_name: unreal-db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: unreal
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - fullstack
+
+  api:
+    build: ./api
+    container_name: unreal-api
+    ports:
+      - 8080:8080
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DB: unreal
+      DB_HOST: db
+      DB_PORT: 5432
+    networks:
+      - fullstack
+    depends_on:
+      - db
+  
+  app:
+    build: ./app
+    container_name: unreal-app
+    ports:
+      - 3000:3000
+      - 443:443
+    volumes:
+      - ./app/src:/app/src
+    environment:
+      VITE_API_URL: http://localhost:8080
+    networks:
+      - fullstack
+
+
+volumes:
+  db-data:
+
+networks:
+  fullstack:
+    driver: bridge
