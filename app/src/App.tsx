@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
+import { getCars } from "./services/car";
+import { Car } from "./types/models";
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [books, setBooks] = useState<any[]>([]);
+  const [books, setBooks] = useState<Car[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/cars")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
+    getCars().then((data) => setBooks(data));
   }, []);
 
   return (

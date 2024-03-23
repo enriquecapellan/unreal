@@ -33,8 +33,7 @@ services:
     build: ./app
     container_name: unreal-app
     ports:
-      - 3000:3000
-      - 443:443
+      - 5173:5173
     volumes:
       - ./app/src:/app/src
     environment:
