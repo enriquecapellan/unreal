@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 
 const CarPage = () => {
   const params = useParams();
+  console.debug({ params });
   const { id } = params;
   const [car, setCar] = useState<Car | undefined>();
   const [error, setError] = useState("");
