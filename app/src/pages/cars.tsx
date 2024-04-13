@@ -11,7 +11,7 @@ const CarsPage = () => {
     getCars()
       .then((data) => setCars(data))
       .catch((err) => {
-        setError("Error trying to fetch data");
+        setError("Error trying to fetch cars");
         console.log(err);
       });
   }, []);
