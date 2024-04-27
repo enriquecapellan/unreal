@@ -9,7 +9,7 @@ const CarsPage = () => {
 
   useEffect(() => {
     getCars()
-      .then((data) => setCars(data))
+      .then(setCars)
       .catch((err) => {
         setError("Error trying to fetch cars");
         console.log(err);
